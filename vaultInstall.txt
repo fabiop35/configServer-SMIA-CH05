@@ -1,0 +1,46 @@
+#Install Vault
+
+#install go
+sudo apt-get update
+download go-2_1.21.0-1-aarch64.pkg.tar.xz
+sudo tar -xvf go1.21.0.linux-amd64.tar.gz
+cd usr/lib
+sudo cp -r go /usr/local
+sudo mv go /usr/local
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+source ~/.profile
+
+#Docker container
+docker pull hashicorp/vault
+docker run -d -p 8200:8200 --name vault -e 'VAULT_DEV_ROOT_TOKEN_ID=myroot' -e 'VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200' hashicorp/vault
+
+vault status
+#Fix error checking seal status:
+export VAULT_ADDR='http://127.0.0.1:8200
+#Fix error 403 forbbiden
+export VAULT_TOKEN=myroot
+vault kv put secret/myapp key1=value1
+vault kv get secret/myapp
+#list
+vault secrets list
+#Creating Vault secrets
+vault kv put kv/user user=admin password=test
+vault kv put licensing-service/default user=admin password=testpw
+#Getting Vault Secrets
+vault kv get kv/user
+vault kv get licensing-service/default
+
+vault kv put licensing-service/gs-vault-config example.username=demouser example.password=demopassword
+
+vault kv put licensing-service/gs-vault-config/cloud example.username=clouduser example.password=cloudpasswo
+
+
+env | grep VAULT
+
+VAULT_NAMESPACE=admin
+
+#Test Vault using Spring Config Server
+curl -X "GET" "http://localhost:8071/licensing-service/default" -H "X-Config-Token: myroot"
+
