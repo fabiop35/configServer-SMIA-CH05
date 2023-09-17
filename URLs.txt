@@ -1,0 +1,3 @@
+http://localhost:8071/licensing-service/env
+http://localhost:8071/eureka-server/env
+http://localhost:8071/organization-service/env

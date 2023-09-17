@@ -1,0 +1,22 @@
+server:
+  port: 8081
+  
+eureka:
+   client:
+      registerWithEureka: true
+      fetchRegistry: true
+      serviceUrl:
+         defaultZone: http://localhost:8070/eureka
+      instance:
+      preferIpAddress: true      
+
+spring: 
+    datasource:
+        username: postgres
+        password: postgres
+        url: jdbc:postgresql://localhost:5432/ostock_dev
+    jpa:
+        generate-ddl: true
+
+
+
