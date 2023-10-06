@@ -18,5 +18,14 @@ spring:
     jpa:
         generate-ddl: true
 
+keycloak:
+    realm: spmia-realm
+    auth-server-url: http://localhost:8080
+    ssl-required: external
+    resource: ostock
+    credentials:
+      secret: vbZyXrcADM8dkoOawvfHKFPfBpGpWkWD
+    use-resource-role-mappings: true
+    bearer-only: true
 
 
