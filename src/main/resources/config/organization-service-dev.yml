@@ -8,7 +8,7 @@ eureka:
       serviceUrl:
          defaultZone: http://localhost:8070/eureka
       instance:
-      preferIpAddress: true      
+      preferIpAddress: false 
 
 spring: 
     datasource:
@@ -17,6 +17,16 @@ spring:
         url: jdbc:postgresql://localhost:5432/ostock_dev
     jpa:
         generate-ddl: true
+    cloud:
+          stream:
+            bindings:
+               output:
+                 destination: orgChangeTopic
+                 content-type: application/json
+            kafka:
+               binder:
+                 zkNodes: localhost
+                 brokers: localhost
 
 keycloak:
     realm: spmia-realm
@@ -24,7 +34,7 @@ keycloak:
     ssl-required: external
     resource: ostock
     credentials:
-      secret: vbZyXrcADM8dkoOawvfHKFPfBpGpWkWD
+      secret: NN8Nj6kKsimwMdhbJBx22tRureZEk5Y6
     use-resource-role-mappings: true
     bearer-only: true
 
