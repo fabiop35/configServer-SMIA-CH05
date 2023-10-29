@@ -17,6 +17,11 @@ spring:
         url: jdbc:postgresql://localhost:5432/ostock_dev
     jpa:
         generate-ddl: true
+    zipkin:
+        baseUrl: http://localhost:9411
+    sleuth:
+        sampler:
+          percentage: 1
     cloud:
           stream:
             bindings:
